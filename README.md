@@ -26,6 +26,11 @@
   <img src="assets/page8.png">
 </p>
 
+### Stylized Synthesis
+<p align="center">
+  <img src="assets/page10.png">
+</p>
+
 
 ## Acknowledgements
 This project is developed by InstantX Team, all copyright reserved.
