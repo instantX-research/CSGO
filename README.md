@@ -31,6 +31,11 @@
   <img src="assets/page10.png">
 </p>
 
+### Text-Driven Image Editing
+<p align="center">
+  <img src="assets/page11.jpg">
+</p>
+
 
 ## Acknowledgements
 This project is developed by InstantX Team, all copyright reserved.
