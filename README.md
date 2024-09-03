@@ -10,6 +10,7 @@
 <a href='https://csgo-gen.github.io/'><img src='https://img.shields.io/badge/Project-Page-green'></a>
 <a href='https://arxiv.org/abs/2404.02733'><img src='https://img.shields.io/badge/Technique-Report-red'></a>
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-blue)](https://huggingface.co/InstantX/CSGO)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-App-red)](https://huggingface.co/spaces/xingpng/CSGO/)
 [![GitHub](https://img.shields.io/github/stars/instantX-research/CSGO?style=social)](https://github.com/instantX-research/CSGO)
 </div>
 
@@ -24,6 +25,7 @@
 
 [//]: # (- **`2024/07/09`**: 🤗 We released the [HuggingFace Space]&#40;https://huggingface.co/spaces/KwaiVGI/liveportrait&#41;, thanks to the HF team and [Gradio]&#40;https://github.com/gradio-app/gradio&#41;!)
 [//]: # (Continuous updates, stay tuned!)
+- **`2024/09/03`**: 🔥 We released the online demo on [Hugggingface](https://huggingface.co/spaces/xingpng/CSGO/).
 - **`2024/09/03`**: 🔥 We released the pre-trained weight.
 - **`2024/09/03`**: 🔥 We released the initial version of the inference code.
 - **`2024/08/30`**: 🔥 We released the technical report on [arXiv](https://arxiv.org/pdf/2408.16766)
@@ -34,7 +36,7 @@
 - [x]  inference code
 - [x]  pre-trained weight [4_16]
 - [x]  pre-trained weight [4_32]
-- [ ]  online demo
+- [x]  online demo
 - [ ]  IMAGStyle dataset
 - [ ]  training code
 - [ ]  more pre-trained weight 
