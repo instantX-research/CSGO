@@ -1,4 +1,4 @@
-# import sys
+import sys
 # sys.path.append("../")
 sys.path.append("./")
 import gradio as gr
@@ -22,7 +22,7 @@ from transformers import BlipProcessor, BlipForConditionalGeneration
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-base_model_path =  "stabilityai/stable-diffusion-xl-base-1.0"
+base_model_path = "stabilityai/stable-diffusion-xl-base-1.0"
 image_encoder_path = "h94/IP-Adapter/sdxl_models/image_encoder"
 csgo_ckpt ='InstantX/CSGO/csgo_4_32.bin'
 pretrained_vae_name_or_path ='madebyollin/sdxl-vae-fp16-fix'

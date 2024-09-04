@@ -25,8 +25,9 @@
 
 [//]: # (- **`2024/07/09`**: 🤗 We released the [HuggingFace Space]&#40;https://huggingface.co/spaces/KwaiVGI/liveportrait&#41;, thanks to the HF team and [Gradio]&#40;https://github.com/gradio-app/gradio&#41;!)
 [//]: # (Continuous updates, stay tuned!)
+- **`2024/09/04`**: 🔥 We released the gradio code. You can simply configure it and use it directly.
 - **`2024/09/03`**: 🔥 We released the online demo on [Hugggingface](https://huggingface.co/spaces/xingpng/CSGO/).
-- **`2024/09/03`**: 🔥 We released the pre-trained weight.
+- **`2024/09/03`**: 🔥 We released the [pre-trained weight](https://huggingface.co/InstantX/CSGO).
 - **`2024/09/03`**: 🔥 We released the initial version of the inference code.
 - **`2024/08/30`**: 🔥 We released the technical report on [arXiv](https://arxiv.org/pdf/2408.16766)
 - **`2024/07/15`**: 🔥 We released the [homepage](https://csgo-gen.github.io).
@@ -202,7 +203,15 @@ images = csgo.generate(pil_content_image= content_image, pil_style_image=style_i
                            controlnet_conditioning_scale=0.4,
                           )
 ```
+### 4 Gradio interface ⚙️
 
+We also provide a Gradio <a href='https://github.com/gradio-app/gradio'><img src='https://img.shields.io/github/stars/gradio-app/gradio'></a> interface for a better experience, just run by:
+
+```bash
+# For Linux and Windows users (and macOS)
+python gradio/app.py 
+```
+If you don't have the resources to configure it, we provide an online [demo](https://huggingface.co/spaces/xingpng/CSGO/).
 ## Demos
 <p align="center">
   <br>
