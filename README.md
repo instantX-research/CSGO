@@ -1,9 +1,10 @@
 <div align="center">
 <h1>CSGO: Content-Style Composition in Text-to-Image Generation</h1>
 
-[**Peng Xing**](https://github.com/xingp-ng)<sup>12*</sup> · [**Haofan Wang**](https://haofanwang.github.io/)<sup>1*</sup> · [**Yanpeng Sun**](https://scholar.google.com.hk/citations?user=a3FI8c4AAAAJ&hl=zh-CN&oi=ao/)<sup>2</sup> · [**Qixun Wang**](https://github.com/wangqixun)<sup>1</sup> · [**Xu Bai**](https://huggingface.co/baymin0220)<sup>1</sup> · [**Hao Ai**](https://github.com/aihao2000)<sup>13</sup> · [**Renyuan Huang**](https://github.com/DannHuang)<sup>14</sup> · [**Zechao Li**](https://zechao-li.github.io/)<sup>2✉</sup>
+[**Peng Xing**](https://github.com/xingp-ng)<sup>12*</sup> · [**Haofan Wang**](https://haofanwang.github.io/)<sup>1*</sup> · [**Yanpeng Sun**](https://scholar.google.com.hk/citations?user=a3FI8c4AAAAJ&hl=zh-CN&oi=ao/)<sup>2</sup> · [**Qixun Wang**](https://github.com/wangqixun)<sup>1</sup> · [**Xu Bai**](https://huggingface.co/baymin0220)<sup>13</sup> · [**Hao Ai**](https://github.com/aihao2000)<sup>14</sup> · [**Renyuan Huang**](https://github.com/DannHuang)<sup>15</sup>
+[**Zechao Li**](https://zechao-li.github.io/)<sup>2✉</sup>
 
-<sup>1</sup>InstantX Team · <sup>2</sup>Nanjing University of Science and Technology · <sup>3</sup>Beihang University · <sup>4</sup>Peking University
+<sup>1</sup>InstantX Team · <sup>2</sup>Nanjing University of Science and Technology · <sup>3</sup>Xiaohongshu  · <sup>4</sup>Beihang University · <sup>5</sup>Peking University
 
 <sup>*</sup>equal contributions, <sup>✉</sup>corresponding authors
 
@@ -248,7 +249,8 @@ If you don't have the resources to configure it, we provide an online [demo](htt
 
 
 ## Acknowledgements
-This project is developed by InstantX Team, all copyright reserved.
+This project is developed by InstantX Team and Xiaohongshu, all copyright reserved.
+Sincere thanks to xiaohongshu for providing the computing resources.
 
 ## Citation 💖
 If you find CSGO useful for your research, welcome to 🌟 this repo and cite our work using the following BibTeX:
