@@ -39,6 +39,7 @@
 - [x]  pre-trained weight [4_16]
 - [x]  pre-trained weight [4_32]
 - [x]  online demo
+- [ ]  pre-trained weight_v2 [4_32]
 - [ ]  IMAGStyle dataset
 - [ ]  training code
 - [ ]  more pre-trained weight 
@@ -79,6 +80,14 @@ pip install -r requirements.txt
 ```
 
 ### 2. Download pretrained weights
+
+We currently release two model weights.
+
+|       Mode       | content token | style token |               Other               |
+|:----------------:|:-----------:|:-----------:|:---------------------------------:|
+|     csgo.bin     |4|16|                 -                 |
+|  csgo_4_32.bin   |4|32|          Deepspeed zero2          |
+| csgo_4_32_v2.bin |4|32| Deepspeed zero2+more(coming soon) |
 
 The easiest way to download the pretrained weights is from HuggingFace:
 ```bash
