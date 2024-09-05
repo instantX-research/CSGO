@@ -94,7 +94,7 @@ The easiest way to download the pretrained weights is from HuggingFace:
 # first, ensure git-lfs is installed, see: https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage
 git lfs install
 # clone and move the weights
-git clone https://huggingface.co/InstanX/CSGO CSGO
+git clone https://huggingface.co/InstantX/CSGO
 ```
 Our method is fully compatible with [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0), [VAE](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix), [ControlNet](https://huggingface.co/TTPlanet/TTPLanet_SDXL_Controlnet_Tile_Realistic), and [Image Encoder](https://huggingface.co/h94/IP-Adapter/tree/main/sdxl_models/image_encoder).
 Please download them and place them in the ./base_models folder.
