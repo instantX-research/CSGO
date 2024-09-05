@@ -42,14 +42,22 @@ pipe = StableDiffusionXLControlNetPipeline.from_pretrained(
     vae=vae
 )
 pipe.enable_vae_tiling()
-
+blip_processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
+blip_model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-large").to(device)
 
 target_content_blocks = BLOCKS['content']
 target_style_blocks = BLOCKS['style']
 controlnet_target_content_blocks = controlnet_BLOCKS['content']
 controlnet_target_style_blocks = controlnet_BLOCKS['style']
 
-
+csgo = CSGO(pipe, image_encoder_path, csgo_ckpt, device, num_content_tokens=4, num_style_tokens=32,
+            target_content_blocks=target_content_blocks, target_style_blocks=target_style_blocks,
+            controlnet_adapter=True,
+            controlnet_target_content_blocks=controlnet_target_content_blocks,
+            controlnet_target_style_blocks=controlnet_target_style_blocks,
+            content_model_resampler=True,
+            style_model_resampler=True,
+            )
 
 MAX_SEED = np.iinfo(np.int32).max
 
@@ -69,6 +77,7 @@ def get_example():
             './assets/img_1.png',
             "Image-Driven Style Transfer",
             "there is a small house with a sheep statue on top of it",
+            1.0,
             0.6,
             1.0,
         ],
@@ -77,20 +86,25 @@ def get_example():
          './assets/img_1.png',
             "Text-Driven Style Synthesis",
          "a cat",
-         0.01,1.0
+            1.0,
+         0.01,
+            1.0
          ],
         [
             None,
             './assets/img_2.png',
             "Text-Driven Style Synthesis",
             "a building",
-            0.01, 1.0
+            0.5,
+            0.01,
+            1.0
         ],
         [
             "./assets/img_0.png",
             './assets/img_1.png',
             "Text Edit-Driven Style Synthesis",
             "there is a small house",
+            1.0,
             0.4,
             1.0
         ],
@@ -98,11 +112,12 @@ def get_example():
     return case
 
 
-def run_for_examples(content_image_pil,style_image_pil,target, prompt, scale_c, scale_s):
+def run_for_examples(content_image_pil,style_image_pil,target, prompt,scale_c_controlnet, scale_c, scale_s):
     return create_image(
         content_image_pil=content_image_pil,
         style_image_pil=style_image_pil,
         prompt=prompt,
+        scale_c_controlnet=scale_c_controlnet,
         scale_c=scale_c,
         scale_s=scale_s,
         guidance_scale=7.0,
@@ -129,6 +144,7 @@ def image_grid(imgs, rows, cols):
 def create_image(content_image_pil,
                  style_image_pil,
                  prompt,
+                 scale_c_controlnet,
                  scale_c,
                  scale_s,
                  guidance_scale,
@@ -138,24 +154,11 @@ def create_image(content_image_pil,
                  target="Image-Driven Style Transfer",
 ):
 
-
-    csgo = CSGO(pipe, image_encoder_path, csgo_ckpt, device, num_content_tokens=4, num_style_tokens=32,
-                target_content_blocks=target_content_blocks, target_style_blocks=target_style_blocks,
-                controlnet_adapter=True,
-                controlnet_target_content_blocks=controlnet_target_content_blocks,
-                controlnet_target_style_blocks=controlnet_target_style_blocks,
-                content_model_resampler=True,
-                style_model_resampler=True,
-                )
-
-
     if content_image_pil is None:
         content_image_pil = Image.fromarray(
             np.zeros((1024, 1024, 3), dtype=np.uint8)).convert('RGB')
 
     if prompt is None:
-        blip_processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
-        blip_model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-large").to(device)
         with torch.no_grad():
             inputs = blip_processor(content_image_pil, return_tensors="pt").to(device)
             out = blip_model.generate(**inputs)
@@ -170,7 +173,7 @@ def create_image(content_image_pil,
                                    negative_prompt=neg_content_prompt,
                                    height=height,
                                    width=width,
-                                   content_scale=1.0,
+                                   content_scale=scale_c,
                                    style_scale=scale_s,
                                    guidance_scale=guidance_scale,
                                    num_images_per_prompt=num_samples,
@@ -178,7 +181,7 @@ def create_image(content_image_pil,
                                    num_samples=1,
                                    seed=seed,
                                    image=content_image.convert('RGB'),
-                                   controlnet_conditioning_scale=scale_c,
+                                   controlnet_conditioning_scale=scale_c_controlnet,
                                    )
 
     elif target =="Text-Driven Style Synthesis":
@@ -190,7 +193,7 @@ def create_image(content_image_pil,
                                    negative_prompt="text, watermark, lowres, low quality, worst quality, deformed, glitch, low contrast, noisy, saturation, blurry",
                                    height=height,
                                    width=width,
-                                   content_scale=0.5,
+                                   content_scale=scale_c,
                                    style_scale=scale_s,
                                    guidance_scale=7,
                                    num_images_per_prompt=num_samples,
@@ -198,7 +201,7 @@ def create_image(content_image_pil,
                                    num_samples=1,
                                    seed=42,
                                    image=content_image.convert('RGB'),
-                                   controlnet_conditioning_scale=scale_c,
+                                   controlnet_conditioning_scale=scale_c_controlnet,
                                    )
     elif target =="Text Edit-Driven Style Synthesis":
 
@@ -208,7 +211,7 @@ def create_image(content_image_pil,
                                    negative_prompt=neg_content_prompt,
                                    height=height,
                                    width=width,
-                                   content_scale=1.0,
+                                   content_scale=scale_c,
                                    style_scale=scale_s,
                                    guidance_scale=guidance_scale,
                                    num_images_per_prompt=num_samples,
@@ -216,7 +219,7 @@ def create_image(content_image_pil,
                                    num_samples=1,
                                    seed=seed,
                                    image=content_image.convert('RGB'),
-                                   controlnet_conditioning_scale=scale_c,
+                                   controlnet_conditioning_scale=scale_c_controlnet,
                                    )
 
     return [image_grid(images, 1, num_samples)]
@@ -292,8 +295,10 @@ with block:
                 prompt = gr.Textbox(label="Prompt",
                                     value="there is a small house with a sheep statue on top of it")
 
+                scale_c_controlnet = gr.Slider(minimum=0, maximum=2.0, step=0.01, value=0.6,
+                                               label="Content Scale for controlnet")
+                scale_c = gr.Slider(minimum=0, maximum=2.0, step=0.01, value=0.6, label="Content Scale for IPA")
 
-                scale_c = gr.Slider(minimum=0, maximum=2.0, step=0.01, value=0.6, label="Content Scale")
                 scale_s = gr.Slider(minimum=0, maximum=2.0, step=0.01, value=1.0, label="Style Scale")
                 with gr.Accordion(open=False, label="Advanced Options"):
 
@@ -320,7 +325,7 @@ with block:
             inputs=[content_image_pil,
                     style_image_pil,
                     prompt,
-
+                    scale_c_controlnet,
                     scale_c,
                     scale_s,
                     guidance_scale,
@@ -332,7 +337,7 @@ with block:
 
     gr.Examples(
         examples=get_example(),
-        inputs=[content_image_pil,style_image_pil,target, prompt, scale_c, scale_s],
+        inputs=[content_image_pil,style_image_pil,target, prompt,scale_c_controlnet, scale_c, scale_s],
         fn=run_for_examples,
         outputs=[generated_image],
         cache_examples=True,
