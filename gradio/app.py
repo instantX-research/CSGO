@@ -158,7 +158,7 @@ def create_image(content_image_pil,
         content_image_pil = Image.fromarray(
             np.zeros((1024, 1024, 3), dtype=np.uint8)).convert('RGB')
 
-    if prompt is None or prompt is '':
+    if prompt is None or prompt == '':
         with torch.no_grad():
             inputs = blip_processor(content_image_pil, return_tensors="pt").to(device)
             out = blip_model.generate(**inputs)
