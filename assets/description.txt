@@ -1,0 +1,5 @@
+omi_c1.png: human_A girl wearing a school uniform, holding a backpack, and standing in front of a school
+omi_c2.png: human_A firefighter rescuing a kitten from a tree in a suburban neighborhood
+omi_c3.png: plants_A palm-lined beach with white sand and turquoise water
+omi_c4.png: square_A peaceful plaza in a park with tall trees and flower beds
+omi_c5.png: square_A square with historical buildings lit by warm evening light
